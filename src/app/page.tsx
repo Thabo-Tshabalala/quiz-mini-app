@@ -1,95 +1,64 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState } from 'react';
+
+type Question = {
+  question: string;
+  options: string[];
+  answer: string;
+};
+
+const questions: Question[] = [
+  {
+    question: "What is the native token of Celo?",
+    options: ["CELO", "ETH", "BTC"],
+    answer: "CELO"
+  },
+  {
+    question: "Which language is used for writing smart contracts?",
+    options: ["Rust", "Solidity", "Python"],
+    answer: "Solidity"
+  },
+  {
+    question: "Where does a Farcaster MiniApp run?",
+    options: ["Inside Farcaster Clients", "On-chain", "In Discord"],
+    answer: "Inside Farcaster Clients"
+  }
+];
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [current, setCurrent] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const handleAnswer = (option: string) => {
+    if (option === questions[current].answer) setScore(score + 1);
+    const next = current + 1;
+    if (next < questions.length) setCurrent(next);
+    else setShowScore(true);
+  };
+
+  return (
+    <main style={{ padding: 20 }}>
+      {showScore ? (
+        <div>
+          <h2>Your score: {score}/{questions.length}</h2>
+          <p>🎉 Great job! (Smart contract reward goes here)</p>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      ) : (
+        <div>
+          <h3>{questions[current].question}</h3>
+          {questions[current].options.map((opt) => (
+            <button
+              key={opt}
+              onClick={() => handleAnswer(opt)}
+              style={{ display: 'block', margin: '8px 0', padding: '10px' }}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+    </main>
   );
 }
