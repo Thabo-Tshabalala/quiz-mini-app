@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@farcaster/frame-sdk": "^0.0.37",
+    "@openzeppelin/contracts": "^5.3.0",
+    "framer-motion": "^12.9.4",
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -19,8 +21,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }
 }
