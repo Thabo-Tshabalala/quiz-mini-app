@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import ClaimFrame from '../frames/claim';  // Update the path to the correct location
 import './globals.css';
 
 declare global {
@@ -40,6 +41,7 @@ const questions = [
     answer: 'Inside Farcaster Clients',
   },
 ];
+
 
 export default function Home() {
   const [shuffledQuestions, setShuffledQuestions] = useState<typeof questions>([]);
@@ -152,6 +154,8 @@ export default function Home() {
                   >
                     Claim Reward
                   </button>
+                  {/* Show the ClaimFrame when the user qualifies for the reward */}
+                  <ClaimFrame userName="John Doe" tokenURI="ipfs://QmXgk49t7k6uPZT5FvryzxfS9D5rcQhGbLVysSyD7w9jw4" />
                 </>
               ) : (
                 <p className="text-sm text-red-600 font-medium mt-4">
