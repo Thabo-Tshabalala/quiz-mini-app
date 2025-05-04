@@ -90,20 +90,21 @@ export default function Home() {
       console.log("You need to score at least 2/3 correct answers to claim the reward.");
       return; // Only allow claiming if score is 2 or higher
     }
-
+  
     const tokenURI = "ipfs://QmXgk49t7k6uPZT5FvryzxfS9D5rcQhGbLVysSyD7w9jw4"; 
     const ethereum = window.ethereum;
     if (!ethereum) {
-      console.error("MetaMask is not installed!");
+      alert("MetaMask is not installed! Please download MetaMask from https://metamask.io/");
+      window.open("https://metamask.io/download.html", "_blank");
       return;
     }
-
+  
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' }) as string[] | undefined;
     if (!accounts || accounts.length === 0) {
       console.error("No accounts found!");
       return;
     }
-
+  
     const userAddress = accounts[0];
     await rewardUserNFT(userAddress, tokenURI);
   };
