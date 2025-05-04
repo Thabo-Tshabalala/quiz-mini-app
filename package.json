@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.8.0",
     "@farcaster/frame-sdk": "^0.0.37",
+    "@metamask/providers": "^22.1.0",
     "@openzeppelin/contracts": "^5.3.0",
+    "ethers": "^6.13.7",
     "framer-motion": "^12.9.4",
     "next": "15.3.1",
     "react": "^19.0.0",
